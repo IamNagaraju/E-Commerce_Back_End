@@ -1,0 +1,29 @@
+{
+  "apps": [
+    {
+      "name": "kloc-application",
+      "script": "index.js",
+      "instances": 1,
+      "exec_mode": "cluster_mode",
+      "env": {
+        "PORT": 4001
+      },
+      "env_production": {
+        "NODE_ENV": "production",
+        "PORT": 4001,
+        "MONGOURI": "mongodb://localhost:27017/E-commerce-backend"
+      }
+    }
+  ],
+  "deploy": {
+    "production": {
+      "key": "~/Downloads/kloc-application.pem",
+      "user": "ubuntu",
+      "host": ["13.234.74.46"],
+      "ref": "origin/master",
+      "repo": "https://github.com/IamNagaraju/E-Commerce_Back_End.git",
+      "path": "/home/ubuntu",
+      "post-deploy": "npm install && pm2 startOrRestart ecosystem.json"
+    }
+  }
+}
